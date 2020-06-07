@@ -5,8 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MoneyMarketsApp.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="Beige">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Headers -->
+        <Label Grid.Column="0" Grid.Row="0" Content="World Map" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="0" Content="Currency Converter" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <!-- Map Canvas -->
+        <Canvas Grid.Column="0" Grid.Row="1">
+        </Canvas>
+
+        <!-- Currency conversion app -->
+        <StackPanel Grid.Column="1" Grid.Row="1">
             
+        </StackPanel>
     </Grid>
 </UserControl>
