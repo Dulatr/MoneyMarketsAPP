@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1022
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyMarketsApp", "MoneyMarketsApp\MoneyMarketsApp.csproj", "{FFBD6383-E78E-45CA-BB4E-713B31FA0DDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFBD6383-E78E-45CA-BB4E-713B31FA0DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFBD6383-E78E-45CA-BB4E-713B31FA0DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFBD6383-E78E-45CA-BB4E-713B31FA0DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFBD6383-E78E-45CA-BB4E-713B31FA0DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D83F6B9-5178-4BA6-87D2-8DD56F044630}
+	EndGlobalSection
+EndGlobal
