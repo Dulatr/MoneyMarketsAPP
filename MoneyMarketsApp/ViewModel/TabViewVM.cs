@@ -17,7 +17,7 @@ namespace MoneyMarketsApp.ViewModel
             {
                 await Task.Delay(1000);
                 DateTime time = DateTime.Now;
-                LastUpdate = time.ToString();
+                LastUpdate = String.Format("{0}:{1}:{2}",time.Hour,time.Minute,time.Second);
             }
 
         }
@@ -33,7 +33,7 @@ namespace MoneyMarketsApp.ViewModel
         }
 
         private string lastUpdate;
-        public String LastUpdate
+        public string LastUpdate
         {
             get => lastUpdate;
 
