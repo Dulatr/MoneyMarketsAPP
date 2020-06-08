@@ -11,18 +11,12 @@ namespace MoneyMarketsApp.ViewModel
     public class TabViewVM : ViewModelBase
     {
 
-        private async Task<DateTime> checkTime()
-        {
-            await Task.Delay(1000);
-            
-            return System.DateTime.Now; 
-        }
-
-        private async void setTime()
+        private async Task<DateTime> setTime()
         {
             while (true)
             {
-                DateTime time = await checkTime();
+                await Task.Delay(1000);
+                DateTime time = DateTime.Now;
                 LastUpdate = time.ToString();
             }
 
@@ -30,7 +24,7 @@ namespace MoneyMarketsApp.ViewModel
 
         public void run()
         {
-            setTime();
+            var task = setTime();
         }
 
         public String ProgStatus
@@ -41,9 +35,8 @@ namespace MoneyMarketsApp.ViewModel
         private string lastUpdate;
         public String LastUpdate
         {
-            get {
-                return lastUpdate;
-            }
+            get => lastUpdate;
+
             set
             {
                 lastUpdate = value;
