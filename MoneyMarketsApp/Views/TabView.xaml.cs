@@ -25,7 +25,9 @@ namespace MoneyMarketsApp.Views
         {
             InitializeComponent();
 
-            DataContext = new TabViewVM();
+            TabViewVM tabVM = new TabViewVM();
+            DataContext = tabVM;
+            tabVM.run();
         }
     }
 }

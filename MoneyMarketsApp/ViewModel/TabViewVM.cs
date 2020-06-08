@@ -23,7 +23,7 @@ namespace MoneyMarketsApp.ViewModel
             while (true)
             {
                 DateTime time = await checkTime();
-                lastUpdate = time.ToString();
+                LastUpdate = time.ToString();
             }
 
         }
@@ -46,7 +46,7 @@ namespace MoneyMarketsApp.ViewModel
             }
             set
             {
-                setTime();
+                lastUpdate = value;
                 RaisePropertyChanged("LastUpdate");
             }
         }
