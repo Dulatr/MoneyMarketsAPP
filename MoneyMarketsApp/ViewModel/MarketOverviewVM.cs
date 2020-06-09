@@ -33,7 +33,9 @@ namespace MoneyMarketsApp.ViewModel
                 NASDAQPercentChange = data["Nasdaq"][1];
                 SPPercentChange = data["S&P"][1];
 
-
+                DOWPointChange = data["Dow"][2];
+                NASDAQPointChange = data["Nasdaq"][2];
+                SPPointChange = data["S&P"][2];
             }
         }
 
@@ -101,6 +103,37 @@ namespace MoneyMarketsApp.ViewModel
             }
         }
         #endregion
-
+        #region Point Change Data
+        private string dowPtChange;
+        public string DOWPointChange
+        {
+            get => dowPtChange;
+            set
+            {
+                dowPtChange = value;
+                RaisePropertyChanged("DOWPointChange");
+            }
+        }
+        private string nasPtChange;
+        public string NASDAQPointChange
+        {
+            get => nasPtChange;
+            set
+            {
+                nasPtChange = value;
+                RaisePropertyChanged("NASDAQPointChange");
+            }
+        }
+        private string spPtChange;
+        public string SPPointChange
+        {
+            get => spPtChange;
+            set
+            {
+                spPtChange = value;
+                RaisePropertyChanged("SPPointChange");
+            }
+        }
+        #endregion
     }
 }
