@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 using System.IO;
 using GalaSoft.MvvmLight;
@@ -37,8 +38,35 @@ namespace MoneyMarketsApp.ViewModel
                 NASDAQPointChange = data["Nasdaq"][2];
                 SPPointChange = data["S&P"][2];
             }
+            using (StreamReader sr = new StreamReader(@"F://ExternalCoderProjects/Python/MM_App/MoneyMarketsCLI/data/DOW30.json"))
+            {
+                string content = await sr.ReadToEndAsync();
+
+                Dictionary<string, string[]> data = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(content);
+
+                tableData = new string[data.Keys.Count];
+
+                for (int i = 1; i<data.Keys.Count; i++)
+                {
+                    tableData[i] = data.Keys.ToArray<string>()[i];
+                }
+                TableData = tableData;
+            }
         }
 
+        public string[] tableData;
+        public string[] TableData
+        {
+            get
+            {
+                return tableData;
+            }
+            set
+            {
+                tableData = value;
+                RaisePropertyChanged("TableData");
+            }
+        }
         #region Points Data
         private string dowPoints;
         public string DOWPoints

@@ -25,6 +25,24 @@ namespace MoneyMarketsApp.Views
         {
             InitializeComponent();
             DataContext = new MarketOverviewVM();
+            
+            for (int i = 1; i < DOW30Table.RowDefinitions.Count; i++)
+            {
+                Button bttn = new Button();
+           
+                bttn.Name = String.Format("Ticker{0}", i);
+                
+                bttn.HorizontalAlignment = HorizontalAlignment.Stretch;
+                bttn.VerticalAlignment = VerticalAlignment.Stretch;
+                bttn.SetValue(Grid.ColumnProperty, 0);
+                bttn.SetValue(Grid.RowProperty, i);
+                bttn.BorderThickness = new Thickness(0);
+                bttn.Background = Brushes.Beige;
+                bttn.SetBinding(Button.ContentProperty, String.Format("TableData[{0}]",i));
+                Console.WriteLine(bttn.Content);
+                DOW30Table.Children.Add(bttn);
+                DOW30Table.UpdateLayout();
+            }
         }
     }
 }
