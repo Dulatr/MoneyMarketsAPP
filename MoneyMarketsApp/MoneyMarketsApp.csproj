@@ -74,8 +74,10 @@
     </ApplicationDefinition>
     <Compile Include="Types\JsonData.cs" />
     <Compile Include="Types\NewsStories.cs" />
+    <Compile Include="Types\Stock.cs" />
     <Compile Include="ViewModel\HomePageVM.cs" />
     <Compile Include="ViewModel\MarketOverviewVM.cs" />
+    <Compile Include="ViewModel\TableViewVM.cs" />
     <Compile Include="ViewModel\TabViewVM.cs" />
     <Compile Include="Views\Currencies.xaml.cs">
       <DependentUpon>Currencies.xaml</DependentUpon>
@@ -88,6 +90,9 @@
     </Compile>
     <Compile Include="Views\Popular.xaml.cs">
       <DependentUpon>Popular.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TableViews\TableHome.xaml.cs">
+      <DependentUpon>TableHome.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TabView.xaml.cs">
       <DependentUpon>TabView.xaml</DependentUpon>
@@ -120,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Popular.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TableViews\TableHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
