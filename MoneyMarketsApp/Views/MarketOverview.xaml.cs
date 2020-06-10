@@ -27,5 +27,23 @@ namespace MoneyMarketsApp.Views
             DataContext = new MarketOverviewVM();
             
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var obj = (Button)sender;
+            int index;
+            if (obj.Name is "DOWButtonHeader"){
+                index = 0;
+            }
+            else if (obj.Name is "NASButtonHeader")
+            {
+                index = 1;
+            }
+            else
+            {
+                index = 2;
+            }
+            TableHome.TableSelection.SelectedValue = TableHome.TableSelection.Items[index];
+        }
     }
 }
