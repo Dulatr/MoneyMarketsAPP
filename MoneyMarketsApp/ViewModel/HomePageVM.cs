@@ -10,22 +10,17 @@ namespace MoneyMarketsApp.ViewModel
 {
     public class HomePageVM : ViewModelBase
     {
+        public HomePageVM()
+        {
+            homeStories = new List<NewsStories>();
+            homeStories.Add(new NewsStories() { title = "Story 1", path= "C:/Users/Tyler Dula/Documents/Temporary/img/2.PNG"});
+            homeStories.Add(new NewsStories() { title="Story 2", path= "C:/Users/Tyler Dula/Documents/Temporary/img/bro.PNG" });
+        }
 
+        public List<NewsStories> homeStories;
         public List<NewsStories> HomeStories
         {
-            get
-            {
-                // check for available data here:> Populate list of stories to display:> Display them
-                List<NewsStories> stories = new List<NewsStories>();
-                stories.Add(new NewsStories());
-                stories.Add(new NewsStories());
-                int storycount = 0;
-                foreach (NewsStories story in stories){
-                    storycount++;
-                    story.title = String.Format("Story {0}",storycount); 
-                }
-                return stories;
-            }
+            get => homeStories;
         }
     }
 

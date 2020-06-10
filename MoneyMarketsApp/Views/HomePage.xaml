@@ -12,8 +12,17 @@
         <Label DockPanel.Dock="Top" Content="In The News" HorizontalAlignment="Center"/>
         <StackPanel DockPanel.Dock="Bottom"></StackPanel>
         <!-- Content body -->
-        <ScrollViewer Background="Azure">
-            <ListBox x:Name="Home" ItemsSource="{Binding HomeStories}"/>
+        <ScrollViewer>
+            <ListBox x:Name="Home" ItemsSource="{Binding HomeStories}" Background="LightGray">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding path}" Width="75" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding title}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </ScrollViewer>
     </DockPanel>
 </UserControl>
