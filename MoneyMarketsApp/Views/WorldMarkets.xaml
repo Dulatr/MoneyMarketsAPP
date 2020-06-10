@@ -16,6 +16,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Button Grid.Column="0" Grid.Row="0" Background="Beige" BorderThickness="0">
@@ -27,5 +28,50 @@
         <Button Grid.Column="2" Grid.Row="0" Background="Beige" BorderThickness="0">
             <Label Content="Asia"/>
         </Button>
+
+        <Button Grid.Row="1" Background="Beige">
+            <TextBlock Text="S&amp;P 500"/>
+        </Button>
+        <Button Grid.Row="2" Background="Beige">
+            <TextBlock Text="Mexican Bolsa"/>
+        </Button>
+        <Button Grid.Row="3" Background="Beige">
+            <TextBlock Text="Brazil Bovespa"/>
+        </Button>
+        
+        <Button Grid.Row="1" Grid.Column="1" Background="Beige">
+            <TextBlock Text="FTSE 100"/>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="1" Background="Beige">
+            <TextBlock Text="DAX"/>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="1" Background="Beige">
+            <TextBlock Text="CAC 40"/>
+        </Button>
+        
+        <Button Grid.Row="1" Grid.Column="2" Background="Beige">
+            <TextBlock Text="Shanghai Composite"/>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="2" Background="Beige">
+            <TextBlock Text="Hang Seng"/>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="2" Background="Beige">
+            <TextBlock Text="Nikkei"/>
+        </Button>
+
+        <Rectangle Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="Black" Height="4">
+            <Rectangle.Effect>
+                <DropShadowEffect Direction="270" Color="LightSlateGray" Opacity="0.75" ShadowDepth="2"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Rectangle Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" HorizontalAlignment="Right" Fill="Black" Width="1">
+ 
+        </Rectangle>
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" HorizontalAlignment="Right" Fill="Black" Width="1">
+
+        </Rectangle>
+        <Rectangle Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" HorizontalAlignment="Right" Fill="Black" Width="1">
+
+        </Rectangle>
     </Grid>
 </UserControl>
