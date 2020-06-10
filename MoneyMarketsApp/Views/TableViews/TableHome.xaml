@@ -57,9 +57,17 @@
             <ListView.View>
                 <GridView ColumnHeaderToolTip="Stock information">
                     <GridViewColumn Header="Ticker"
-                                    DisplayMemberBinding="{Binding Ticker}"/>
+                                    DisplayMemberBinding="{Binding Ticker}" Width="125"/>
                     <GridViewColumn Header="Price"
-                                    DisplayMemberBinding="{Binding Price}"/>
+                                    DisplayMemberBinding="{Binding Price}" Width="125"/>
+                    <GridViewColumn Header="Change"
+                                    DisplayMemberBinding="{Binding Change}" Width="125"/>
+                    <GridViewColumn Header="% Change"
+                                    DisplayMemberBinding="{Binding PctChange}" Width="125"/>
+                    <GridViewColumn Header="Volume"
+                                    DisplayMemberBinding="{Binding Vol}" Width="125"/>
+                    <GridViewColumn Header="YTD Change"
+                                    DisplayMemberBinding="{Binding YTD}" Width="125"/>
                 </GridView>
             </ListView.View>
         </ListView>

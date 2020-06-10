@@ -15,8 +15,8 @@ namespace MoneyMarketsApp.ViewModel
         {
             currentSelection = TableOptions[0];
             data = new List<Stock>();
-            data.Add(new Stock() { Price = "12", Ticker = "AAPL" });
-            data.Add(new Stock() { Price = "15", Ticker = "MMM" });
+            data.Add(new Stock() { Price = "12", Ticker = "AAPL" ,Change="3",PctChange="1.2%",Vol="231113",YTD="25%"});
+            data.Add(new Stock() { Price = "15", Ticker = "MMM"});
         }
 
         public List<string> TableOptions

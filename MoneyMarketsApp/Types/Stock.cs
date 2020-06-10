@@ -10,11 +10,9 @@ namespace MoneyMarketsApp.Types
     {
         public string Ticker { get; set; }
         public string Price { get; set; }
-        
-        public Stock()
-        {
-            Ticker = "";
-            Price = "";
-        }
+        public string Change { get; set; }
+        public string PctChange { get; set; }
+        public string Vol { get; set; }
+        public string YTD { get; set; }
     }
 }
