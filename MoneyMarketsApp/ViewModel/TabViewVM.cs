@@ -17,7 +17,7 @@ namespace MoneyMarketsApp.ViewModel
             {
                 await Task.Delay(1000);
                 DateTime time = DateTime.Now;
-                LastUpdate = String.Format("{0}:{1}:{2}",time.Hour,time.Minute,time.Second);
+                LastUpdate = String.Format("Last Updated {0}:{1}:{2}",time.Hour,time.Minute,time.Second);
             }
 
         }
@@ -27,11 +27,36 @@ namespace MoneyMarketsApp.ViewModel
             var task = setTime();
         }
 
-        public String ProgStatus
+        #region Tooltips
+        public string ProgStatusToolTip
         {
-            get => "Program Connected";
+            get
+            {
+                if (ProgStatus is "Disconnected")
+                {
+                    return "CNN Money Markets information is unavailable at this time.\n\nCheck that you have internet connection or that MoneyMarketsCLI tools are installed.";
+                }
+                return "Currently updating info from CNN Money Markets";
+            }
         }
+        public string MarketStatusToolTip
+        {
+            get
+            {
+                if (MarketStatus is "Closed")
+                {
+                    return "Your local stock exchanges are closed for the day.";
+                }
+                return "Your local stock exchanges are currently open.";
+            }
+        }
+        #endregion
 
+        #region  Status bindings
+        public string ProgStatus
+        {
+            get => "Disconnected";
+        }
         private string lastUpdate;
         public string LastUpdate
         {
@@ -43,10 +68,10 @@ namespace MoneyMarketsApp.ViewModel
                 RaisePropertyChanged("LastUpdate");
             }
         }
-
         public String MarketStatus
         {
             get => "Closed";
         }
+        #endregion
     }
 }

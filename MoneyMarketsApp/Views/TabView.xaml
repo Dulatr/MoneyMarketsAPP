@@ -10,7 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="16*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -38,10 +38,40 @@
         </TabControl>
         
         <!-- Status Bar -->
-        <Label x:Name="StatusLabel" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Foreground="GhostWhite" Content="{Binding ProgStatus}"/>
-        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right">
-            <Button x:Name="MarketOpenLabel"  HorizontalAlignment="Right" Foreground="GhostWhite" Background="#30341d" BorderBrush="AliceBlue" Content="{Binding MarketStatus}"/>
-            <Label x:Name="LastUpdateTime" HorizontalAlignment="Right" Foreground="GhostWhite" Background="#30341d" BorderBrush="AliceBlue" Content="{Binding LastUpdate}"/>
-        </StackPanel>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="StatusLabel"
+                    Grid.Column="0"
+                    Foreground="GhostWhite" Background="#30341d" BorderBrush="SlateGray"
+                    ToolTip="{Binding ProgStatusToolTip}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding ProgStatus}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>
+        <Grid Grid.Column="2" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="MarketOpenLabel"
+                    Foreground="GhostWhite" Background="#30341d" BorderBrush="SlateGray" 
+                    Grid.Column="1"
+                    ToolTip="{Binding MarketStatusToolTip}"
+                    Content="{Binding MarketStatus}"/>
+            <Button x:Name="LastUpdateTime"
+                    Foreground="GhostWhite" Background="#30341d" BorderBrush="Black" 
+                    Grid.Column="2" Grid.ColumnSpan="2"
+                    Content="{Binding LastUpdate}"/>
+        </Grid>
+
     </Grid>
 </UserControl>
