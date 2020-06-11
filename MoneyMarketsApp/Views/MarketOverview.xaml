@@ -7,6 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="Beige">
+    <UserControl.Resources>
+        <Style x:Key="OverViewButtons" TargetType="Button">
+            <Setter Property="Background" Value="Beige"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -15,101 +22,57 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.75*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         
         <!-- Headers -->
-        <Button x:Name="DOWButtonHeader" Background="Beige" BorderThickness="0" Grid.Column="0" Grid.Row="0" Click="Button_Click">
+        <Button x:Name="DOWButtonHeader" Style="{StaticResource OverViewButtons}" Grid.Column="0" Grid.Row="0" Click="Button_Click">
             <Label Content="DOW Jones Industrial" FontSize="22" Foreground="#492f13"/>
         </Button>
-        <Button x:Name="NASButtonHeader" Background="Beige" BorderThickness="0" Grid.Column="1" Grid.Row="0" Click="Button_Click">
+        <Button x:Name="NASButtonHeader" Style="{StaticResource OverViewButtons}" Grid.Column="1" Grid.Row="0" Click="Button_Click">
             <Label Content="NASDAQ Composite" FontSize="22" Foreground="#492f13"/>
         </Button>
-        <Button x:Name="SPButtonHeader" Background="Beige" BorderThickness="0" Grid.Column="2" Grid.Row="0" Click="Button_Click">
+        <Button x:Name="SPButtonHeader" Style="{StaticResource OverViewButtons}" Grid.Column="2" Grid.Row="0" Click="Button_Click">
             <Label Content="S&amp;P 500" FontSize="22" Foreground="#492f13"/>
         </Button>
         
         <!-- DOW Panel -->
-        <StackPanel x:Name="DOWPanel" Grid.Column="0" Grid.Row="1">
-            <Label HorizontalAlignment="Center">
-                <TextBlock TextDecorations="Underline">Ticker Stats</TextBlock>
-            </Label>
-            <!-- Ticker Stats -->
-            <Grid x:Name="DOWStats">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.75*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-
-                <Label Grid.Column="0" Grid.Row="0" Content="Points" HorizontalAlignment="Center"/>
-                <Label Grid.Column="1" Grid.Row="0" Content="Point Change" HorizontalAlignment="Center"/>
-                <Label Grid.Column="2" Grid.Row="0" Content="Percent Change" HorizontalAlignment="Center"/>
-
-                <Label Grid.Column="0" Grid.Row="1" Content="{Binding DOWPoints}"/>
-                <Label Grid.Column="1" Grid.Row="1" Content="{Binding DOWPointChange}"/>
-                <Label Grid.Column="2" Grid.Row="1" Content="{Binding DOWPercentChange}"/>
-            </Grid>
-        </StackPanel>
+        <Grid x:Name="DOWPanel" Grid.Column="0" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="{Binding DOWPoints}" Style="{StaticResource OverViewButtons}" ToolTip="{Binding PointsToolTip}"/>
+            <Button Grid.Column="1" Content="{Binding DOWPointChange}" Style="{StaticResource OverViewButtons}" ToolTip="{Binding PointChangeToolTip}"/>
+            <Button Grid.Column="2" Content="{Binding DOWPercentChange}" Style="{StaticResource OverViewButtons}" ToolTip="{Binding PercentToolTip}"/>
+        </Grid>
         
         <!-- NASDAQ Panel -->
-        <StackPanel x:Name="NASDAQPanel" Grid.Column="1" Grid.Row="1">
-            <Label HorizontalAlignment="Center">
-                <TextBlock TextDecorations="Underline">Ticker Stats</TextBlock>
-            </Label>
-            <!-- Ticker Stats -->
-            <Grid x:Name="NASDAQStats">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.75*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-
-                <Label Grid.Column="0" Grid.Row="0" Content="Points" HorizontalAlignment="Center"/>
-                <Label Grid.Column="1" Grid.Row="0" Content="Point Change" HorizontalAlignment="Center"/>
-                <Label Grid.Column="2" Grid.Row="0" Content="Percent Change" HorizontalAlignment="Center"/>
-
-                <Label Grid.Column="0" Grid.Row="1" Content="{Binding NASDAQPoints}"/>
-                <Label Grid.Column="1" Grid.Row="1" Content="{Binding NASDAQPointChange}"/>
-                <Label Grid.Column="2" Grid.Row="1" Content="{Binding NASDAQPercentChange}"/>
-            </Grid>
-        </StackPanel>
+        <Grid x:Name="NASDAQPanel" Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="{Binding NASDAQPoints}" Style="{StaticResource OverViewButtons}" ToolTip="{Binding PointsToolTip}"/>
+            <Button Grid.Column="1" Content="{Binding NASDAQPointChange}"  Style="{StaticResource OverViewButtons}" ToolTip="{Binding PointChangeToolTip}"/>
+            <Button Grid.Column="2" Content="{Binding NASDAQPercentChange}" Style="{StaticResource OverViewButtons}" ToolTip="{Binding PercentToolTip}"/>
+        </Grid>
         
         <!-- SP500 Panel -->
-        <StackPanel x:Name="S_P_Panel" Grid.Column="2" Grid.Row="1">
-            <Label HorizontalAlignment="Center">
-                <TextBlock TextDecorations="Underline">Ticker Stats</TextBlock>
-            </Label>
-            <!-- Ticker Stats -->
-            <Grid x:Name="S_P_Stats">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.75*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
+        <Grid x:Name="S_P_Panel" Grid.Column="2" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Grid.Row="1" Content="{Binding SPPoints}" Style="{StaticResource OverViewButtons}" ToolTip="{Binding PointsToolTip}"/>
+            <Button Grid.Column="1" Grid.Row="1" Content="{Binding SPPointChange}" Style="{StaticResource OverViewButtons}" ToolTip="{Binding PointChangeToolTip}"/>
+            <Button Grid.Column="2" Grid.Row="1" Content="{Binding SPPercentChange}" Style="{StaticResource OverViewButtons}" ToolTip="{Binding PercentToolTip}"/>
 
-                <Label Grid.Column="0" Grid.Row="0" Content="Points" HorizontalAlignment="Center"/>
-                <Label Grid.Column="1" Grid.Row="0" Content="Point Change" HorizontalAlignment="Center"/>
-                <Label Grid.Column="2" Grid.Row="0" Content="Percent Change" HorizontalAlignment="Center"/>
-
-                <Label Grid.Column="0" Grid.Row="1" Content="{Binding SPPoints}"/>
-                <Label Grid.Column="1" Grid.Row="1" Content="{Binding SPPointChange}"/>
-                <Label Grid.Column="2" Grid.Row="1" Content="{Binding SPPercentChange}"/>
-            </Grid>
-        </StackPanel>
+        </Grid>
         
         <!-- Table Data -->
         <local:TableHome x:Name="TableHome" Grid.ColumnSpan="3" Grid.Row="2"/>

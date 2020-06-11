@@ -10,7 +10,7 @@
 
     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Label DockPanel.Dock="Top" Content="In The News" HorizontalAlignment="Center"/>
-        <StackPanel DockPanel.Dock="Bottom"></StackPanel>
+
         <!-- Content body -->
         <ScrollViewer>
             <ListBox x:Name="Home" ItemsSource="{Binding HomeStories}" Background="LightGray">

@@ -163,5 +163,19 @@ namespace MoneyMarketsApp.ViewModel
             }
         }
         #endregion
+        #region ToolTips
+        public string PointsToolTip
+        {
+            get => "Current index price in points.";
+        }
+        public string PointChangeToolTip
+        {
+            get => "Total change from market open.";
+        }
+        public string PercentToolTip
+        {
+            get => "Percentage change in points since market open";
+        }
+        #endregion
     }
 }
