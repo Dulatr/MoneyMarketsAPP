@@ -77,6 +77,7 @@
     <Compile Include="Types\Stock.cs" />
     <Compile Include="ViewModel\HomePageVM.cs" />
     <Compile Include="ViewModel\MarketOverviewVM.cs" />
+    <Compile Include="ViewModel\PopularTableVM.cs" />
     <Compile Include="ViewModel\TableViewVM.cs" />
     <Compile Include="ViewModel\TabViewVM.cs" />
     <Compile Include="Views\Currencies.xaml.cs">
@@ -90,6 +91,9 @@
     </Compile>
     <Compile Include="Views\Popular.xaml.cs">
       <DependentUpon>Popular.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TableViews\PopularTables.xaml.cs">
+      <DependentUpon>PopularTables.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TableViews\TableHome.xaml.cs">
       <DependentUpon>TableHome.xaml</DependentUpon>
@@ -125,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Popular.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TableViews\PopularTables.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -55,6 +55,7 @@
                   Grid.Row="2" 
                   Background="SlateGray">
             <ListView.View>
+
                 <GridView ColumnHeaderToolTip="Stock information">
                     <GridViewColumn Header="Ticker"
                                     DisplayMemberBinding="{Binding Ticker}" Width="125"/>
