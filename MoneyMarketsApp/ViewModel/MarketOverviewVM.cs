@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Windows.Controls;
 using System.IO;
 using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
+using System.Windows;
 
 namespace MoneyMarketsApp.ViewModel
 {
@@ -15,43 +17,48 @@ namespace MoneyMarketsApp.ViewModel
     {
         public MarketOverviewVM()
         {
-            readJson();
+            collect_data_background();
         }   
         
-        private async void readJson()
+        private async void collect_data_background()
         {
-            using (StreamReader sr = new StreamReader(@"F://ExternalCoderProjects/Python/MM_App/MoneyMarketsCLI/data/market_overview.json"))
+            string stdout;
+
+            using (Process money = new Process())
             {
-                string content = await sr.ReadToEndAsync();
+                money.StartInfo.UseShellExecute = false;
+                money.StartInfo.CreateNoWindow = true;
+                money.StartInfo.RedirectStandardError = true;
+                money.StartInfo.RedirectStandardOutput = true;
+                string path_variable = Environment.GetEnvironmentVariable("MONEY_MARKETS");
+                money.StartInfo.FileName = path_variable + "/money.exe";
 
-                Dictionary<string, string[]> data = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(content);
+                money.Start();
+                stdout = await money.StandardOutput.ReadToEndAsync();
+            
+                ParseData(stdout);
 
-                DOWPoints = data["Dow"][0];
-                NASDAQPoints = data["Nasdaq"][0];
-                SPPoints = data["S&P"][0];
-
-                DOWPercentChange = data["Dow"][1];
-                NASDAQPercentChange = data["Nasdaq"][1];
-                SPPercentChange = data["S&P"][1];
-
-                DOWPointChange = data["Dow"][2];
-                NASDAQPointChange = data["Nasdaq"][2];
-                SPPointChange = data["S&P"][2];
             }
-            using (StreamReader sr = new StreamReader(@"F://ExternalCoderProjects/Python/MM_App/MoneyMarketsCLI/data/DOW30.json"))
-            {
-                string content = await sr.ReadToEndAsync();
+        }
 
-                Dictionary<string, string[]> data = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(content);
+        private void ParseData(string response)
+        {
+            string[] temp = response.Split('\n');
 
-                tableData = new string[data.Keys.Count];
+            Dictionary<string, string[]> data = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(temp[0]);
+            
+            DOWPoints = data["Dow"][0];
+            NASDAQPoints = data["Nasdaq"][0];
+            SPPoints = data["S&P"][0];
 
-                for (int i = 1; i<data.Keys.Count; i++)
-                {
-                    tableData[i] = data.Keys.ToArray<string>()[i];
-                }
-                TableData = tableData;
-            }
+            DOWPercentChange = data["Dow"][1];
+            NASDAQPercentChange = data["Nasdaq"][1];
+            SPPercentChange = data["S&P"][1];
+
+            DOWPointChange = data["Dow"][2];
+            NASDAQPointChange = data["Nasdaq"][2];
+            SPPointChange = data["S&P"][2];
+
         }
 
         public string[] tableData;
