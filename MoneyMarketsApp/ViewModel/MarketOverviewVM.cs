@@ -21,9 +21,8 @@ namespace MoneyMarketsApp.ViewModel
             collect_data_background();
         }   
         
-        private async void collect_data_background()
+        private void collect_data_background()
         {
-            string stdout;
 
             using (Process money = new Process())
             {
@@ -32,20 +31,27 @@ namespace MoneyMarketsApp.ViewModel
                 money.StartInfo.RedirectStandardError = true;
                 money.StartInfo.RedirectStandardOutput = true;
                 string path_variable = Environment.GetEnvironmentVariable("MONEY_MARKETS");
-                Console.WriteLine(path_variable);
                 money.StartInfo.FileName = path_variable + "/money.exe";
                 money.StartInfo.Arguments = "stock --overview";
                 money.Start();
-                stdout = await money.StandardOutput.ReadToEndAsync();
-            
-                ParseData(stdout);
+                money.BeginOutputReadLine();
+                money.OutputDataReceived += ParseData;
 
             }
         }
 
-        private void ParseData(string response)
+        private void ParseData(object sender, DataReceivedEventArgs e)
         {
-            var data = JsonConvert.DeserializeObject<JsonData>(response);
+            JsonData data;
+            try
+            {
+                data = JsonConvert.DeserializeObject<JsonData>(e.Data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
             
             DOWPoints = data.overview["Dow"][0];
             NASDAQPoints = data.overview["Nasdaq"][0];

@@ -19,9 +19,8 @@ namespace MoneyMarketsApp.ViewModel
             //homeStories.Add(new NewsStories() { title = "Story 1", path= "C:/Users/Tyler Dula/Documents/Temporary/img/2.PNG"});
             //homeStories.Add(new NewsStories() { title="Story 2", path= "C:/Users/Tyler Dula/Documents/Temporary/img/bro.PNG" });
         }
-        private async void collect_data_background()
+        private void collect_data_background()
         {
-            string stdout;
 
             using (Process money = new Process())
             {
@@ -34,15 +33,23 @@ namespace MoneyMarketsApp.ViewModel
                 money.StartInfo.FileName = path_variable + "/money.exe";
                 money.StartInfo.Arguments = "-i story --front-page";
                 money.Start();
-                stdout = await money.StandardOutput.ReadToEndAsync();
-
-                ParseData(stdout);
-
+                money.BeginOutputReadLine();
+                money.OutputDataReceived += ParseData;
             }
         }
-        private void ParseData(string response)
+        private void ParseData(object sender, DataReceivedEventArgs e)
         {
-            var stories = JsonConvert.DeserializeObject<StoryCollection>(response);
+            StoryCollection stories;
+            try
+            {
+                stories = JsonConvert.DeserializeObject<StoryCollection>(e.Data);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
             foreach (string page in stories.stories.Keys)
             {
                 foreach(string story in stories.stories[page].Keys)
@@ -54,12 +61,17 @@ namespace MoneyMarketsApp.ViewModel
                 }
 
             }
-            RaisePropertyChanged("HomeStories");
+            HomeStories = homeStories;
         }
         public List<Story> homeStories;
         public List<Story> HomeStories
         {
             get => homeStories;
+            set
+            {
+                homeStories = value;
+                RaisePropertyChanged("HomeStories");
+            }
         }
     }
 
