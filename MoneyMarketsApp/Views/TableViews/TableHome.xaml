@@ -45,7 +45,7 @@
                   Background="LightGray" 
                   ItemsSource="{Binding TableOptions}"
                   SelectedValue="{Binding CurrentTableSelection}" 
-                  FontSize="10"/>
+                  FontSize="10" IsEnabled="{Binding NotBusy}"/>
         
         <!--Data table -->
         <ListView x:Name="Data" 
