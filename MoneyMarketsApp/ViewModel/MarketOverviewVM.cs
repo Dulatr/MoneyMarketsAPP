@@ -10,6 +10,7 @@ using System.IO;
 using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using System.Windows;
+using MoneyMarketsApp.Types;
 
 namespace MoneyMarketsApp.ViewModel
 {
@@ -31,8 +32,9 @@ namespace MoneyMarketsApp.ViewModel
                 money.StartInfo.RedirectStandardError = true;
                 money.StartInfo.RedirectStandardOutput = true;
                 string path_variable = Environment.GetEnvironmentVariable("MONEY_MARKETS");
+                Console.WriteLine(path_variable);
                 money.StartInfo.FileName = path_variable + "/money.exe";
-
+                money.StartInfo.Arguments = "stock --overview";
                 money.Start();
                 stdout = await money.StandardOutput.ReadToEndAsync();
             
@@ -43,21 +45,19 @@ namespace MoneyMarketsApp.ViewModel
 
         private void ParseData(string response)
         {
-            string[] temp = response.Split('\n');
-
-            Dictionary<string, string[]> data = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(temp[0]);
+            var data = JsonConvert.DeserializeObject<JsonData>(response);
             
-            DOWPoints = data["Dow"][0];
-            NASDAQPoints = data["Nasdaq"][0];
-            SPPoints = data["S&P"][0];
+            DOWPoints = data.overview["Dow"][0];
+            NASDAQPoints = data.overview["Nasdaq"][0];
+            SPPoints = data.overview["S&P"][0];
 
-            DOWPercentChange = data["Dow"][1];
-            NASDAQPercentChange = data["Nasdaq"][1];
-            SPPercentChange = data["S&P"][1];
+            DOWPercentChange = data.overview["Dow"][1];
+            NASDAQPercentChange = data.overview["Nasdaq"][1];
+            SPPercentChange = data.overview["S&P"][1];
 
-            DOWPointChange = data["Dow"][2];
-            NASDAQPointChange = data["Nasdaq"][2];
-            SPPointChange = data["S&P"][2];
+            DOWPointChange = data.overview["Dow"][2];
+            NASDAQPointChange = data.overview["Nasdaq"][2];
+            SPPointChange = data.overview["S&P"][2];
 
         }
 

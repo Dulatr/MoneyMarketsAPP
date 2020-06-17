@@ -8,17 +8,10 @@ using Newtonsoft.Json;
 
 namespace MoneyMarketsApp.Types
 {
-    public class JsonData: Dictionary<string,string[]>
+    public class JsonData
     {
-        public JsonData() : base() { }
-
-        public string[] DOW { get; set; }
-        public string[] NASDAQ { get; set; }
-        public string[] SP { get; set; }
-
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this);
-        }
+        public Dictionary<string, string[]> overview { get; set; }
+        public Dictionary<string,Dictionary<string,string[]>> tables { get; set; }
+        public string lastUpdate { get; set; }
     }
 }

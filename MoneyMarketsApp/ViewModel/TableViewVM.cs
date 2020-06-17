@@ -17,8 +17,6 @@ namespace MoneyMarketsApp.ViewModel
         {
             currentSelection = TableOptions[0];
             data = new List<Stock>();
-            //data.Add(new Stock() { Price = "12", Ticker = "AAPL" ,Change="3",PctChange="1.2%",Vol="231113",YTD="25%"});
-            //data.Add(new Stock() { Price = "15", Ticker = "MMM" });
             collect_data_background();
             
         }
@@ -34,36 +32,35 @@ namespace MoneyMarketsApp.ViewModel
                 money.StartInfo.RedirectStandardOutput = true;
                 string path_variable = Environment.GetEnvironmentVariable("MONEY_MARKETS");
                 money.StartInfo.FileName = path_variable + "/money.exe";
-
+                money.StartInfo.Arguments = "stock --key-stats";
                 money.Start();
                 stdout = await money.StandardOutput.ReadToEndAsync();
 
                 ParseData(stdout);
-
             }
         }
 
         public void ParseData(string response)
         {
-            string[] temp = response.Split('\n');
 
-            Dictionary<string, string[]> _temp_data = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(temp[1]);
-
-            foreach (string key  in _temp_data.Keys)
+            JsonData _temp_data = JsonConvert.DeserializeObject<JsonData>(response);
+            Dictionary<string, string[]> keystats = _temp_data.tables["keystats"];
+            foreach (string key in keystats.Keys)
             {
-                if (key != "Company"){
-                    data.Add(new Stock() {
-                        Ticker =key,
-                        Price =_temp_data[key][0],
-                        Change =_temp_data[key][1],
-                        PctChange = _temp_data[key][2],
-                        Vol=_temp_data[key][3],  
-                        YTD=_temp_data[key][4],
+                if (key != "Company")
+                {
+                    data.Add(new Stock()
+                    {
+                        Ticker = key,
+                        Price = _temp_data.tables["keystats"][key][0],
+                        Change = _temp_data.tables["keystats"][key][1],
+                        PctChange = _temp_data.tables["keystats"][key][2],
+                        Vol = _temp_data.tables["keystats"][key][3],
+                        YTD = _temp_data.tables["keystats"][key][4],
                     });
                 }
-
             }
-        } 
+        }
 
         public List<string> TableOptions
         {
