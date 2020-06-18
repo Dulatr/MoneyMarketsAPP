@@ -78,6 +78,7 @@
     <Compile Include="ViewModel\HomePageVM.cs" />
     <Compile Include="ViewModel\MarketOverviewVM.cs" />
     <Compile Include="ViewModel\PopularTableVM.cs" />
+    <Compile Include="ViewModel\Scheduler.cs" />
     <Compile Include="ViewModel\TableViewVM.cs" />
     <Compile Include="ViewModel\TabViewVM.cs" />
     <Compile Include="Views\Currencies.xaml.cs">

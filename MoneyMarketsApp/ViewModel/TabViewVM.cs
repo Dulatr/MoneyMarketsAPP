@@ -10,21 +10,14 @@ namespace MoneyMarketsApp.ViewModel
 {
     public class TabViewVM : ViewModelBase
     {
-
-        private async Task<DateTime> setTime()
+        public TabViewVM(Scheduler scheduler)
         {
-            while (true)
-            {
-                await Task.Delay(1000);
-                DateTime time = DateTime.Now;
-                LastUpdate = String.Format("Last Updated {0}:{1}:{2}",time.Hour,time.Minute,time.Second);
-            }
-
+            scheduler.ClockFinished += OnClockFinish;
         }
 
-        public void run()
+        public void OnClockFinish(object sender, TimeEventArgs e)
         {
-            var task = setTime();
+            LastUpdate = e.Time.ToString();
         }
 
         #region Tooltips
@@ -74,4 +67,5 @@ namespace MoneyMarketsApp.ViewModel
         }
         #endregion
     }
+
 }
