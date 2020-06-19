@@ -24,10 +24,10 @@ namespace MoneyMarketsApp.Views
         public TabView()
         {
             InitializeComponent();
-            Scheduler tabScheduler = new Scheduler(); 
-            TabViewVM tabVM = new TabViewVM(tabScheduler);
+            
+            TabViewVM tabVM = new TabViewVM();
             DataContext = tabVM;
-            tabScheduler.runClock();
+
         }
     }
 }

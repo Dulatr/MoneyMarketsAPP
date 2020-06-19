@@ -23,40 +23,22 @@ namespace MoneyMarketsApp.ViewModel
             spTable = new List<Stock>();
 
             NotBusy = false;
-            foreach (string selection in TableOptions)
-            {
-                collect_data_background(selection);
-            }
+            Scheduler.Instance.ProcessFinished += OnProcessFinished;
         }
 
-        public void collect_data_background(string tableName)
-        {
-            if (tableName == "S&P 500")
-            {
-                tableName = "sandp";
-            }
-            NotBusy = false;
-            using (Process money = new Process())
-            {
-                money.StartInfo.UseShellExecute = false;
-                money.StartInfo.CreateNoWindow = true;
-                money.StartInfo.RedirectStandardError = true;
-                money.StartInfo.RedirectStandardOutput = true;
-
-                string path_variable = Environment.GetEnvironmentVariable("MONEY_MARKETS");
-                money.StartInfo.FileName = path_variable + "/money.exe";
-                money.StartInfo.Arguments = string.Format("stock --US {0}",tableName);
-
-                money.Start();
-                money.BeginOutputReadLine();
-                money.OutputDataReceived += money_OutputDataReceived;
-            }
-        }
-
-        private void money_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        private void OnProcessFinished(object sender, DataReceivedEventArgs e)
         {
             var proccess = (Process)sender;
-            string argument = proccess.StartInfo.Arguments.Split()[2];
+            string argument;
+            try
+            {
+                argument = proccess.StartInfo.Arguments.Split()[2];
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                return;
+            }
+
             string toTable = (argument == "sandp") ? "S&P 500" : argument;
 
             List<Stock> stockList;

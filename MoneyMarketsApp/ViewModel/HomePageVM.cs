@@ -15,30 +15,18 @@ namespace MoneyMarketsApp.ViewModel
         public HomePageVM()
         {
             homeStories = new List<Story>();
-            collect_data_background();
-            //homeStories.Add(new NewsStories() { title = "Story 1", path= "C:/Users/Tyler Dula/Documents/Temporary/img/2.PNG"});
-            //homeStories.Add(new NewsStories() { title="Story 2", path= "C:/Users/Tyler Dula/Documents/Temporary/img/bro.PNG" });
+            Scheduler.Instance.ProcessFinished += ParseData;
         }
-        private void collect_data_background()
-        {
 
-            using (Process money = new Process())
-            {
-                money.StartInfo.UseShellExecute = false;
-                money.StartInfo.CreateNoWindow = true;
-                money.StartInfo.RedirectStandardError = true;
-                money.StartInfo.RedirectStandardOutput = true;
-                string path_variable = Environment.GetEnvironmentVariable("MONEY_MARKETS");
-                Console.WriteLine(path_variable);
-                money.StartInfo.FileName = path_variable + "/money.exe";
-                money.StartInfo.Arguments = "-i story --front-page";
-                money.Start();
-                money.BeginOutputReadLine();
-                money.OutputDataReceived += ParseData;
-            }
-        }
         private void ParseData(object sender, DataReceivedEventArgs e)
         {
+            var proccess = (Process)sender;
+            string argument = proccess.StartInfo.Arguments.Split()[1];
+            if (argument != "story")
+            {
+                return;
+            }
+                
             StoryCollection stories;
             try
             {

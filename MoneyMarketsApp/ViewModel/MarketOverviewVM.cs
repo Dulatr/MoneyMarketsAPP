@@ -18,30 +18,19 @@ namespace MoneyMarketsApp.ViewModel
     {
         public MarketOverviewVM()
         {
-            collect_data_background();
+            Scheduler.Instance.ProcessFinished += ParseData;
         }   
-        
-        private void collect_data_background()
-        {
-
-            using (Process money = new Process())
-            {
-                money.StartInfo.UseShellExecute = false;
-                money.StartInfo.CreateNoWindow = true;
-                money.StartInfo.RedirectStandardError = true;
-                money.StartInfo.RedirectStandardOutput = true;
-                string path_variable = Environment.GetEnvironmentVariable("MONEY_MARKETS");
-                money.StartInfo.FileName = path_variable + "/money.exe";
-                money.StartInfo.Arguments = "stock --overview";
-                money.Start();
-                money.BeginOutputReadLine();
-                money.OutputDataReceived += ParseData;
-
-            }
-        }
 
         private void ParseData(object sender, DataReceivedEventArgs e)
         {
+            var proccess = (Process)sender;
+            string argument = proccess.StartInfo.Arguments.Split()[1];
+            string arg2 = proccess.StartInfo.Arguments.Split()[0];
+            if (((argument != "stock") & (arg2 != "stock")) | (argument != "--overview") )
+            {
+                return;
+            }
+
             JsonData data;
             try
             {

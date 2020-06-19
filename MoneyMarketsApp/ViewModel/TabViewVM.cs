@@ -10,9 +10,9 @@ namespace MoneyMarketsApp.ViewModel
 {
     public class TabViewVM : ViewModelBase
     {
-        public TabViewVM(Scheduler scheduler)
+        public TabViewVM()
         {
-            scheduler.ClockFinished += OnClockFinish;
+            Scheduler.Instance.ClockFinished += OnClockFinish;
         }
 
         public void OnClockFinish(object sender, TimeEventArgs e)
