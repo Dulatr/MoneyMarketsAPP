@@ -40,7 +40,7 @@ namespace MoneyMarketsApp.ViewModel
 
         private async void runClock()
         {
-            while (true)
+            while (ClockFinished != null)
             {
                 await Task.Delay(1000);
                 ClockFinished(this, new TimeEventArgs(null));
@@ -110,7 +110,7 @@ namespace MoneyMarketsApp.ViewModel
 
         private void sendData(object sender, DataReceivedEventArgs e)
         {
-            ProcessFinished(sender,e);
+            ProcessFinished?.Invoke(sender, e);
         }
     }
 

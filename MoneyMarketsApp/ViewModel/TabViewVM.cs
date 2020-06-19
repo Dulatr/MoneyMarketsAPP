@@ -1,5 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
+using Newtonsoft.Json;
+using MoneyMarketsApp.Types;
+
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +16,20 @@ namespace MoneyMarketsApp.ViewModel
     {
         public TabViewVM()
         {
-            Scheduler.Instance.ClockFinished += OnClockFinish;
+            Scheduler.Instance.ProcessFinished += OnProcessFinish;
         }
 
-        public void OnClockFinish(object sender, TimeEventArgs e)
+        public void OnProcessFinish(object sender, DataReceivedEventArgs e)
         {
-            LastUpdate = e.Time.ToString();
+            try
+            {
+                JsonData response = JsonConvert.DeserializeObject<JsonData>(e.Data);
+                LastUpdate = response.lastUpdated;
+            }
+            catch
+            {
+                return;
+            }
         }
 
         #region Tooltips

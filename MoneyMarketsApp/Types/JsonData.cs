@@ -12,6 +12,6 @@ namespace MoneyMarketsApp.Types
     {
         public Dictionary<string, string[]> overview { get; set; }
         public Dictionary<string,Dictionary<string,string[]>> tables { get; set; }
-        public string lastUpdate { get; set; }
+        public string lastUpdated { get; set; }
     }
 }
